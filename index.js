@@ -109,11 +109,19 @@ function radians(degrees) {
  */
 function fromShortKey(key) {
   const sourceLayers = key.split(":");
+  if (sourceLayers.length > 4) {
+    throw new Error("Only 4 layers allowed");
+  }
+  
   let layers = [];
   for (let i = 0; i < sourceLayers.length; ++i) {
     const text = sourceLayers[i];
     if (text.length !== 8) {
       throw new Error("Invalid layer: '" + text + "' -> must be 8 characters");
+    }
+    
+    if (text === "--".repeat(4)) {
+      throw new Error("Empty layers are not allowed");
     }
 
     const quads = [null, null, null, null];

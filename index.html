@@ -1,81 +1,160 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>
-            shapez.io shape generator
-        </title>
+  <head>
+    <title>
+      shapez.io shape generator
+    </title>
+    <link rel="stylesheet" href="index.css" media="all" />
+    <script async src="index.js"></script>
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="https://shapez.io/favicon.ico"
+    />
 
-        <script async src="index.js"></script>
-        <style>
-            html,
-            body {
-                width: 100%;
-                height: 100%;
-                padding: 0;
-            }
-            body {
-                font-family: "Source Sans Pro", "Roboto", sans-serif;
-                background: #fafafa;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-            }
+    <!-- just include all variants for ease of use -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <h1>Shape generator</h1>
 
-            #resultWrapper {
-                border: 1px solid #ccc;
-                margin-top: 10px;
-                background: #fff;
-                padding: 40px;
-            }
-
-            #resultWrapper #result {
-            }
-
-            #code {
-                width: 600px;
-                font-family: monospace;
-                padding: 30px;
-                border: 1px solid #ccc;
-                background: #fff;
-                font-size: 17px;
-            }
-
-            #code:focus {
-                outline: none;
-                border-color: #39f;
-            }
-
-            #error {
-                height: 40px;
-                color: #f77;
-                margin-top: 10px;
-                display: flex;
-                text-align: left;
-                align-items: center;
-            }
-
-            #error:not(.hasError) {
-                color: rgb(71, 179, 71);
-            }
-        </style>
-    </head>
-    <body>
-        <h2>Shape generator</h2>
+    <div class="grid">
+      <div class="col">
         <input
-            value="CuCuCuCu"
-            id="code"
-            placeholder="shape code"
-            onkeypress="debounce(generate)"
-            onkeydown="debounce(generate)"
-            onkeyup="debounce(generate)"
-            onchange="debounce(generate)"
+          value="CuCuCuCu"
+          id="code"
+          placeholder="shape code"
+          onkeypress="debounce(generate)"
+          onkeydown="debounce(generate)"
+          onkeyup="debounce(generate)"
+          onchange="debounce(generate)"
         />
         <div id="error">Error</div>
         <br />
 
         <div id="resultWrapper">
-            <canvas id="result" width="512" height="512"></canvas>
+          <canvas id="result" width="512" height="512"></canvas>
         </div>
-    </body>
+        <button onclick="exportShape()">Export</button>
+        <button onclick="shareShape()">Share</button>
+      </div>
+      <div class="col infoBox">
+        <h2>About</h2>
+
+        <p>
+          With this tool you can generate any shape supported in shapez.io! This
+          can be useful to analyze shapes or draft new ones.
+        </p>
+
+        <h3>Instructions</h3>
+
+        <p>
+          Shapes can be generated with a such called <strong>short key</strong>.
+          Each shape consists of up to 4 layers, and each layers consists of 4
+          quadrants.
+        </p>
+        <br />
+        <p>
+          Each quadrant is described via two letters - At first, an
+          <strong>uppercase letter describing the shape</strong>, then followed
+          by a <strong>lowercase letter describing its color</strong>. If the
+          quadrant is empty, <code>--</code> is used
+        </p>
+        <br />
+        <p>
+          Layers itself are then seperated via <code>:</code>, starting with the
+          lowest layer.
+        </p>
+
+        <div class="grid shapeCodes">
+          <div class="col">
+            <h3>Shape codes</h3>
+            <ul>
+              <li><code>C</code> Circle</li>
+              <li><code>R</code> Rectangle</li>
+              <li><code>W</code> Windmill / Fan</li>
+              <li><code>S</code> Star</li>
+            </ul>
+          </div>
+          <div class="col">
+            <h3>color codes</h3>
+            <ul>
+              <li>
+                <code>r</code>
+                <span class="colorPreview" style="background: #ff666a;"></span>
+                Red
+              </li>
+              <li>
+                <code>g</code>
+                <span class="colorPreview" style="background: #78ff66;"></span>
+                Green
+              </li>
+              <li>
+                <code>b</code>
+                <span class="colorPreview" style="background: #66a7ff;"></span>
+                Blue
+              </li>
+
+              <li>
+                <code>y</code>
+                <span class="colorPreview" style="background: #fcf52a;"></span>
+                Yellow
+              </li>
+
+              <li>
+                <code>p</code>
+                <span class="colorPreview" style="background: #dd66ff;"></span>
+                Purple
+              </li>
+
+              <li>
+                <code>c</code>
+                <span class="colorPreview" style="background: #00fcff;"></span>
+                Cyan
+              </li>
+
+              <li>
+                <code>u</code>
+                <span class="colorPreview" style="background: #aaaaaa;"></span>
+                Uncolored
+              </li>
+
+              <li>
+                <code>w</code>
+                <span class="colorPreview" style="background: #ffffff;"></span>
+                White
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>Examples</h3>
+
+        <script>
+          const examples = [
+            ["CwCwCwCw", "White circle"],
+            ["----CuCu", "Half rectangle"],
+            ["CgScScCg", "Circles and stars mixed"],
+            ["RpRpRpRp:CwCwCwCw", "Layering example"],
+          ];
+          for (let i = 0; i < examples.length; ++i) {
+            const [key, desc] = examples[i];
+            document.write(`
+                <div class="example">
+                    <code>${key}</code><label>${desc}</label>
+                    <button onclick='viewShape(\"${key}\")'>View</button>
+                    </div>
+            `);
+          }
+        </script>
+      </div>
+    </div>
+
+    <div class="footer">
+        This tool is open source - <a href="https://github.com/tobspr/shapez.io-viewer" target="_blank">View on Github</a>
+    </div>
+  </body>
 </html>

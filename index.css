@@ -1,0 +1,153 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+}
+body {
+    font-family: "Barlow", sans-serif;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h1, h2, h3 {
+    text-transform: uppercase;
+    font-weight: 300;
+    margin-bottom: 5px;
+}
+
+h1 {
+    margin-bottom: 30px;
+}
+
+code {
+    background: #fff;
+    padding: 1px 4px;
+}
+
+a{
+    text-decoration: none;
+    color: #39f;
+}
+
+
+#resultWrapper {
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: #fff;
+    padding: 40px;
+}
+
+#resultWrapper #result {
+}
+
+#code {
+    width: 594px;
+    font-family: monospace;
+    padding: 30px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    background: #fff;
+    font-size: 17px;
+}
+
+#code:focus {
+    outline: none;
+    border-color: #39f;
+}
+
+#error {
+    height: 40px;
+    color: #f77;
+    margin-top: 10px;
+    display: flex;
+    text-align: left;
+    align-items: center;
+}
+
+#error:not(.hasError) {
+    color: rgb(71, 179, 71);
+}
+
+button {
+    padding: 9px 16px;
+    text-transform: uppercase;
+    background: #39f;
+    border: 0;
+    color: #fff;
+    cursor: pointer;
+    transition: opacity 0.12s ease-in-out;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 20px;
+}
+
+.infoBox {
+    background: #eee;
+    padding: 20px;
+    width: 500px;
+}
+.infoBox h3 {
+    margin-top: 20px;
+}
+
+ul {
+}
+
+.shapeCodes code {
+    background: #fff;
+    padding: 2px 5px;
+    margin-right: 6px;
+}
+
+.shapeCodes li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1px;
+}
+
+.colorPreview {
+    border-radius: 50px;
+    width: 9px;
+    height: 9px;
+    display: inline-block;
+    border: 1px solid #333538;
+    margin-left: 3px;
+    margin-right: 10px;
+}
+
+.example {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    justify-items: start;
+    margin-bottom: 3px;
+    grid-gap: 10px; 
+    padding: 3px;
+}
+.example:nth-child(even) {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.example button {
+    padding: 1px 3px;
+}
+.footer {
+    margin-top: 30px;
+}

@@ -98,11 +98,8 @@ CanvasRenderingContext2D.prototype.beginCircle = function (x, y, r) {
   this.arc(x, y, r, 0, 2.0 * Math.PI);
 };
 
-//create a String containing all the possible shortcodes for the shapes
 const possibleShapesString = Object.keys(enumShortcodeToSubShape).join('');
-//create a String containing all the possible shortcodes for the colors
-const possibleColorsString = Object.keys(enumShortcodeToColor).toString().replaceAll(',', '');
-//creating a regex which can check the validity of a layer. "--------" is still valid, so be carefull
+const possibleColorsString = Object.keys(enumShortcodeToColor).join('');
 const layerRegex = new RegExp('([' + possibleShapesString + '][' + possibleColorsString + ']|-{2}){4}');
 
 /////////////////////////////////////////////////////

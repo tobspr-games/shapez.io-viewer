@@ -99,7 +99,7 @@ CanvasRenderingContext2D.prototype.beginCircle = function (x, y, r) {
 };
 
 //create a String containing all the possible shortcodes for the shapes
-const possibleShapesString = Object.keys(enumShortcodeToSubShape).toString().replaceAll(',', '');
+const possibleShapesString = Object.keys(enumShortcodeToSubShape).join('');
 //create a String containing all the possible shortcodes for the colors
 const possibleColorsString = Object.keys(enumShortcodeToColor).toString().replaceAll(',', '');
 //creating a regex which can check the validity of a layer. "--------" is still valid, so be carefull
@@ -131,7 +131,7 @@ function fromShortKey(key) {
       throw new Error("Empty layers are not allowed");
     }
     
-    if(!text.match(layerRegex)){
+    if (!layerRegex.test(text)) {
       throw new Error("Invalid syntax in layer " + (i + 1));
     }
     

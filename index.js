@@ -98,6 +98,10 @@ CanvasRenderingContext2D.prototype.beginCircle = function (x, y, r) {
   this.arc(x, y, r, 0, 2.0 * Math.PI);
 };
 
+const possibleShapesString = Object.keys(enumShortcodeToSubShape).join('');
+const possibleColorsString = Object.keys(enumShortcodeToColor).join('');
+const layerRegex = new RegExp('([' + possibleShapesString + '][' + possibleColorsString + ']|-{2}){4}');
+
 /////////////////////////////////////////////////////
 
 function radians(degrees) {
@@ -123,7 +127,11 @@ function fromShortKey(key) {
     if (text === "--".repeat(4)) {
       throw new Error("Empty layers are not allowed");
     }
-
+    
+    if (!layerRegex.test(text)) {
+      throw new Error("Invalid syntax in layer " + (i + 1));
+    }
+    
     const quads = [null, null, null, null];
     for (let quad = 0; quad < 4; ++quad) {
       const shapeText = text[quad * 2 + 0];

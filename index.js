@@ -3,6 +3,8 @@
  *
  */
 
+const maxLayer = 4;
+
 /** @enum {string} */
 const enumSubShape = {
   rect: "rect",
@@ -113,8 +115,8 @@ function radians(degrees) {
  */
 function fromShortKey(key) {
   const sourceLayers = key.split(":");
-  if (sourceLayers.length > 4) {
-    throw new Error("Only 4 layers allowed");
+  if (sourceLayers.length > maxLayer) {
+    throw new Error("Only " + maxLayer + " layers allowed");
   }
   
   let layers = [];
@@ -360,17 +362,15 @@ function getRandomInt(max) {
 }
 
 function getRandomShape(){
-  var shapez = ['C', 'R', 'W', 'S'];
-  return shapez[getRandomInt(shapez.length)];
+  return Object.values(enumSubShapeToShortcode)[getRandomInt(Object.keys(enumSubShapeToShortcode).length)];
 }
 
 function getRandomColor(){
-  var colorz = ['r', 'g', 'b', 'y', 'p', 'c', 'w', 'u'];
-  return colorz[getRandomInt(colorz.length)];
+  return Object.values(enumColorToShortcode)[getRandomInt(Object.keys(enumColorToShortcode).length)];
 }
 
 window.randomShape = () => {
-  let layers = getRandomInt(4);
+  let layers = getRandomInt(maxLayer);
   let code = '';
   for (var i = 0; i <= layers; i++) {
     code = code + getRandomShape() + getRandomColor() + getRandomShape() + getRandomColor() + getRandomShape() + getRandomColor() + getRandomShape() + getRandomColor() + ':';

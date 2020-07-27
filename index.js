@@ -354,3 +354,28 @@ window.shareShape = () => {
   const url = "https://viewer.shapez.io?" + code;
   alert("You can share this url: " + url);
 };
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+
+function getRandomShape(){
+  var shapez = ['C', 'R', 'W', 'S'];
+  return shapez[getRandomInt(shapez.length)];
+}
+
+function getRandomColor(){
+  var colorz = ['r', 'g', 'b', 'y', 'p', 'c', 'w', 'u'];
+  return colorz[getRandomInt(colorz.length)];
+}
+
+window.randomShape = () => {
+  let layers = getRandomInt(3) + 1;
+  let code = '';
+  for (var i = 0; i< layers; i++) {
+    code = code + getRandomShape() + getRandomColor() + getRandomShape() + getRandomColor() + getRandomShape() + getRandomColor() + getRandomShape() + getRandomColor() + ':';
+    console.log(code);
+  }
+  code = code.replace(/:+$/,'');
+  document.getElementById("code").value = code);
+}

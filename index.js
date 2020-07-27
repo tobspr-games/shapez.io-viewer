@@ -370,12 +370,12 @@ function getRandomColor(){
 }
 
 window.randomShape = () => {
-  let layers = getRandomInt(3) + 1;
+  let layers = getRandomInt(4);
   let code = '';
-  for (var i = 0; i< layers; i++) {
+  for (var i = 0; i <= layers; i++) {
     code = code + getRandomShape() + getRandomColor() + getRandomShape() + getRandomColor() + getRandomShape() + getRandomColor() + getRandomShape() + getRandomColor() + ':';
-    console.log(code);
   }
   code = code.replace(/:+$/,'');
-  document.getElementById("code").value = code);
+  document.getElementById("code").value = code;
+  generate();
 }

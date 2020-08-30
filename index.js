@@ -362,7 +362,9 @@ function getRandomInt(max) {
 }
 
 function getRandomShape(){
-  return Object.values(enumSubShapeToShortcode)[getRandomInt(Object.keys(enumSubShapeToShortcode).length)];
+	let shapes = Object.values(enumSubShapeToShortcode);
+	shapes.push('-');
+  return shapes[getRandomInt(shapes.length)];
 }
 
 function getRandomColor(){
@@ -373,7 +375,24 @@ window.randomShape = () => {
   let layers = getRandomInt(maxLayer);
   let code = '';
   for (var i = 0; i <= layers; i++) {
-    code = code + getRandomShape() + getRandomColor() + getRandomShape() + getRandomColor() + getRandomShape() + getRandomColor() + getRandomShape() + getRandomColor() + ':';
+	let layertext = '';
+	for (var y = 0; y <= 3; y++) {
+		let randomShape = getRandomShape();
+		let randomColor = getRandomColor();
+		
+		if(randomShape === '-') {
+			randomColor = '-';
+			console.log('in');
+		}
+		layertext = layertext + randomShape + randomColor;
+	}
+	//empty layer not allowed
+	if(layertext === '--------'){
+		layertext = '';
+		y--;
+	} else {
+		code = code + layertext + ':';
+	}
   }
   code = code.replace(/:+$/,'');
   document.getElementById("code").value = code;

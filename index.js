@@ -388,8 +388,7 @@ window.randomShape = () => {
 	}
 	//empty layer not allowed
 	if(layertext === '--------'){
-		layertext = '';
-		y--;
+		i--;
 	} else {
 		code = code + layertext + ':';
 	}

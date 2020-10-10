@@ -352,5 +352,12 @@ window.viewShape = (key) => {
 window.shareShape = () => {
   const code = document.getElementById("code").value.trim();
   const url = "https://viewer.shapez.io?" + code;
-  alert("You can share this url: " + url);
+  const copyField = document.createElement('textarea');
+  copyField.setAttribute('hidden', 'true');
+  copyField.value = url;
+  document.body.appendChild(copyField);
+  copyField.select();
+  document.execCommand('copy');
+  document.body.removeChild(copyField);
+  alert("The Share link was copied to clipboard!");
 };

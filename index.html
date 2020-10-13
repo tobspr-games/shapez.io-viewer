@@ -24,15 +24,19 @@
 
     <div class="grid">
       <div class="col">
-        <input
-          value="CuCuCuCu"
-          id="code"
-          placeholder="shape code"
-          onkeypress="debounce(generate)"
-          onkeydown="debounce(generate)"
-          onkeyup="debounce(generate)"
-          onchange="debounce(generate)"
-        />
+        <div class="codeBox">
+          <input
+            value="CuCuCuCu"
+            id="code"
+            placeholder="shape code"
+            onkeypress="debounce(generate)"
+            onkeydown="debounce(generate)"
+            onkeyup="debounce(generate)"
+            onchange="debounce(generate)"
+          />
+          <button onclick="copyToClipboard()">Copy</button>
+        </div>
+
         <div id="error">Error</div>
         <br />
 

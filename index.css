@@ -52,6 +52,14 @@ a{
     max-height: 100%;
 }
 
+.codeBox {
+  display: flex;
+}
+
+.codeBox button {
+  width: 90px;
+}
+
 #code {
     width: 100%;
     font-family: monospace;
@@ -60,6 +68,7 @@ a{
     border: 1px solid #ccc;
     background: #fff;
     font-size: 17px;
+    margin-right: 10px;
 }
 
 #code:focus {

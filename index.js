@@ -285,19 +285,19 @@ function renderShape(layers) {
 
 /////////////////////////////////////////////////////
 
-function showError(msg) {
+function showError(msg, isError = true) {
   const errorDiv = document.getElementById("error");
-  errorDiv.classList.toggle("hasError", !!msg);
-  if (msg) {
-    errorDiv.innerText = msg;
-  } else {
-    errorDiv.innerText = "Shape generated";
-  }
+  errorDiv.classList.toggle("hasError", isError);
+  errorDiv.innerText = msg;
+}
+
+function showSuccess(msg) {
+  showError(msg, false)
 }
 
 // @ts-ignore
 window.generate = () => {
-  showError(null);
+  showSuccess("Shape generated");
   // @ts-ignore
   const code = document.getElementById("code").value.trim();
 
@@ -353,4 +353,10 @@ window.shareShape = () => {
   const code = document.getElementById("code").value.trim();
   const url = "https://viewer.shapez.io?" + code;
   alert("You can share this url: " + url);
+};
+
+window.copyToClipboard = () => {
+  const code = document.getElementById("code").value.trim();
+  navigator.clipboard.writeText(code);
+  showSuccess("Copied to clipboard")
 };

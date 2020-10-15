@@ -3,6 +3,8 @@
  *
  */
 
+const maxLayer = 4;
+
 /** @enum {string} */
 const enumSubShape = {
   rect: "rect",
@@ -113,8 +115,8 @@ function radians(degrees) {
  */
 function fromShortKey(key) {
   const sourceLayers = key.split(":");
-  if (sourceLayers.length > 4) {
-    throw new Error("Only 4 layers allowed");
+  if (sourceLayers.length > maxLayer) {
+    throw new Error("Only " + maxLayer + " layers allowed");
   }
   
   let layers = [];
@@ -355,8 +357,50 @@ window.shareShape = () => {
   alert("You can share this url: " + url);
 };
 
+
 window.copyToClipboard = () => {
   const code = document.getElementById("code").value.trim();
   navigator.clipboard.writeText(code);
   showSuccess("Copied to clipboard")
 };
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+
+function getRandomShape(){
+	let shapes = Object.values(enumSubShapeToShortcode);
+	shapes.push('-');
+  return shapes[getRandomInt(shapes.length)];
+}
+
+function getRandomColor(){
+  return Object.values(enumColorToShortcode)[getRandomInt(Object.keys(enumColorToShortcode).length)];
+}
+
+window.randomShape = () => {
+  let layers = getRandomInt(maxLayer);
+  let code = '';
+  for (var i = 0; i <= layers; i++) {
+	let layertext = '';
+	for (var y = 0; y <= 3; y++) {
+		let randomShape = getRandomShape();
+		let randomColor = getRandomColor();
+		
+		if(randomShape === '-') {
+			randomColor = '-';
+			console.log('in');
+		}
+		layertext = layertext + randomShape + randomColor;
+	}
+	//empty layer not allowed
+	if(layertext === '--------'){
+		i--;
+	} else {
+		code = code + layertext + ':';
+	}
+  }
+  code = code.replace(/:+$/,'');
+  document.getElementById("code").value = code;
+  generate();
+}

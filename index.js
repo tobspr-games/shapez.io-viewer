@@ -326,8 +326,8 @@ window.debounce = (fn) => {
 window.addEventListener("load", () => {
   if (window.location.search) {
     var key = window.location.search.substr(1);
-    if (key.indexOf("%") >= 0) {
-      key = decodeURIComponent(key);
+    if (key.indexOf(".") >= 0) {
+      key = key.replace(/\./gi, ":");
     }
     document.getElementById("code").value = key;
   }
@@ -359,7 +359,7 @@ window.viewShape = (key) => {
 
 window.shareShape = () => {
   const code = document.getElementById("code").value.trim();
-  const url = "https://viewer.shapez.io?" + encodeURIComponent(code);
+  const url = "https://viewer.shapez.io?" + code.replace(/:/gi, ".");
   alert("You can share this url: " + url);
 };
 

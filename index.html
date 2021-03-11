@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>
-      shapez.io shape generator
-    </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>shapez.io shape generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="index.css" media="all" />
     <script async src="index.js"></script>
     <link
@@ -18,9 +16,42 @@
       href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-FCFW3W6WL0"
+    ></script>
+
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-FCFW3W6WL0", { anonymizeIp: true });
+    </script>
   </head>
   <body>
-    <h1>Shape generator</h1>
+    <a href="https://steam.shapez.io" target="_blank">
+      <img id="logo" src="logo.png" />
+    </a>
+    <h1>Shape viewer</h1>
+
+    <a
+      class="nftHint"
+      href="https://opensea.io/collection/shapez"
+      target="_blank"
+    >
+      <span>
+        Want to support me? You can now acquire shapez.io shapes as NFTs (Non
+        Fungible Tokens)!
+
+        <strong>Click here to view the available shapes.</strong>
+      </span>
+      <img src="opensea-logo-flat-colored-white.png" />
+    </a>
 
     <div class="grid">
       <div class="col">
@@ -53,21 +84,21 @@
         <h3>Instructions</h3>
 
         <p>
-          Shapes can be generated with a <strong>short key</strong>.
-          Each shape consists of up to 4 layers, and each layers consists of 4
-          quadrants. Shape codes start from the upper right quadrant and move clockwise.
+          Shapes can be generated with a <strong>short key</strong>. Each shape
+          consists of up to 4 layers, and each layers consists of 4 quadrants.
+          Shape codes start from the upper right quadrant and move clockwise.
         </p>
         <br />
         <p>
           Each quadrant is described via a pair of letters - An
-          <strong>uppercase letter describing the shape</strong>, followed
-          by a <strong>lowercase letter describing its color</strong>. If the
+          <strong>uppercase letter describing the shape</strong>, followed by a
+          <strong>lowercase letter describing its color</strong>. If the
           quadrant is empty, <code>--</code> is used
         </p>
         <br />
         <p>
-          Layers are separated via <code>:</code>, starting with the
-          lowest layer.
+          Layers are separated via <code>:</code>, starting with the lowest
+          layer.
         </p>
 
         <div class="grid shapeCodes">
@@ -85,47 +116,47 @@
             <ul>
               <li>
                 <code>r</code>
-                <span class="colorPreview" style="background: #ff666a;"></span>
+                <span class="colorPreview" style="background: #ff666a"></span>
                 Red
               </li>
               <li>
                 <code>g</code>
-                <span class="colorPreview" style="background: #78ff66;"></span>
+                <span class="colorPreview" style="background: #78ff66"></span>
                 Green
               </li>
               <li>
                 <code>b</code>
-                <span class="colorPreview" style="background: #66a7ff;"></span>
+                <span class="colorPreview" style="background: #66a7ff"></span>
                 Blue
               </li>
 
               <li>
                 <code>y</code>
-                <span class="colorPreview" style="background: #fcf52a;"></span>
+                <span class="colorPreview" style="background: #fcf52a"></span>
                 Yellow
               </li>
 
               <li>
                 <code>p</code>
-                <span class="colorPreview" style="background: #dd66ff;"></span>
+                <span class="colorPreview" style="background: #dd66ff"></span>
                 Purple
               </li>
 
               <li>
                 <code>c</code>
-                <span class="colorPreview" style="background: #00fcff;"></span>
+                <span class="colorPreview" style="background: #00fcff"></span>
                 Cyan
               </li>
 
               <li>
                 <code>u</code>
-                <span class="colorPreview" style="background: #aaaaaa;"></span>
+                <span class="colorPreview" style="background: #aaaaaa"></span>
                 Uncolored
               </li>
 
               <li>
                 <code>w</code>
-                <span class="colorPreview" style="background: #ffffff;"></span>
+                <span class="colorPreview" style="background: #ffffff"></span>
                 White
               </li>
             </ul>
@@ -151,15 +182,22 @@
             `);
           }
         </script>
-		<div class="example">
-            <code></code><label>Random Shape</label>
-            <button onclick="randomShape()">Randomize</button>
-          </div>
+        <div class="example">
+          <code></code><label>Random Shape</label>
+          <button onclick="randomShape()">Randomize</button>
+        </div>
       </div>
     </div>
 
     <div class="footer">
-        This tool is open source - <a href="https://github.com/tobspr/shapez.io-viewer" target="_blank">View on Github</a>
+      <a target="_blank" href="https://steam.shapez.io/">Steam Page</a> |
+      <a target="_blank" href="https://discord.com/invite/HN7EVzV">Discord</a> |
+      <a
+        target="_blank"
+        href="https://github.com/tobspr/shapez.io"
+        target="_blank"
+        >Github</a
+      >
     </div>
   </body>
 </html>

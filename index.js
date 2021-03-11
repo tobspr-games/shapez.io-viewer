@@ -100,9 +100,11 @@ CanvasRenderingContext2D.prototype.beginCircle = function (x, y, r) {
   this.arc(x, y, r, 0, 2.0 * Math.PI);
 };
 
-const possibleShapesString = Object.keys(enumShortcodeToSubShape).join('');
-const possibleColorsString = Object.keys(enumShortcodeToColor).join('');
-const layerRegex = new RegExp('([' + possibleShapesString + '][' + possibleColorsString + ']|-{2}){4}');
+const possibleShapesString = Object.keys(enumShortcodeToSubShape).join("");
+const possibleColorsString = Object.keys(enumShortcodeToColor).join("");
+const layerRegex = new RegExp(
+  "([" + possibleShapesString + "][" + possibleColorsString + "]|-{2}){4}"
+);
 
 /////////////////////////////////////////////////////
 
@@ -118,22 +120,22 @@ function fromShortKey(key) {
   if (sourceLayers.length > maxLayer) {
     throw new Error("Only " + maxLayer + " layers allowed");
   }
-  
+
   let layers = [];
   for (let i = 0; i < sourceLayers.length; ++i) {
     const text = sourceLayers[i];
     if (text.length !== 8) {
       throw new Error("Invalid layer: '" + text + "' -> must be 8 characters");
     }
-    
+
     if (text === "--".repeat(4)) {
       throw new Error("Empty layers are not allowed");
     }
-    
+
     if (!layerRegex.test(text)) {
       throw new Error("Invalid syntax in layer " + (i + 1));
     }
-    
+
     const quads = [null, null, null, null];
     for (let quad = 0; quad < 4; ++quad) {
       const shapeText = text[quad * 2 + 0];
@@ -164,14 +166,15 @@ function renderShape(layers) {
   const context = canvas.getContext("2d");
 
   context.save();
-  context.clearRect(0, 0, 1000, 1000);
+  context.fillStyle = "#fff";
 
   const w = 512;
   const h = 512;
   const dpi = 1;
+  context.fillRect(0, 0, w, h);
 
   context.translate((w * dpi) / 2, (h * dpi) / 2);
-  context.scale((dpi * w) / 23, (dpi * h) / 23);
+  context.scale((dpi * w) / 28, (dpi * h) / 28);
 
   context.fillStyle = "#e9ecf7";
 
@@ -361,39 +364,41 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
-function getRandomShape(){
-	let shapes = Object.values(enumSubShapeToShortcode);
-	shapes.push('-');
+function getRandomShape() {
+  let shapes = Object.values(enumSubShapeToShortcode);
+  shapes.push("-");
   return shapes[getRandomInt(shapes.length)];
 }
 
-function getRandomColor(){
-  return Object.values(enumColorToShortcode)[getRandomInt(Object.keys(enumColorToShortcode).length)];
+function getRandomColor() {
+  return Object.values(enumColorToShortcode)[
+    getRandomInt(Object.keys(enumColorToShortcode).length)
+  ];
 }
 
 window.randomShape = () => {
   let layers = getRandomInt(maxLayer);
-  let code = '';
+  let code = "";
   for (var i = 0; i <= layers; i++) {
-	let layertext = '';
-	for (var y = 0; y <= 3; y++) {
-		let randomShape = getRandomShape();
-		let randomColor = getRandomColor();
-		
-		if(randomShape === '-') {
-			randomColor = '-';
-			console.log('in');
-		}
-		layertext = layertext + randomShape + randomColor;
-	}
-	//empty layer not allowed
-	if(layertext === '--------'){
-		i--;
-	} else {
-		code = code + layertext + ':';
-	}
+    let layertext = "";
+    for (var y = 0; y <= 3; y++) {
+      let randomShape = getRandomShape();
+      let randomColor = getRandomColor();
+
+      if (randomShape === "-") {
+        randomColor = "-";
+        console.log("in");
+      }
+      layertext = layertext + randomShape + randomColor;
+    }
+    //empty layer not allowed
+    if (layertext === "--------") {
+      i--;
+    } else {
+      code = code + layertext + ":";
+    }
   }
-  code = code.replace(/:+$/,'');
+  code = code.replace(/:+$/, "");
   document.getElementById("code").value = code;
   generate();
-}
+};

@@ -321,7 +321,7 @@ window.addEventListener("load", () => {
 });
 
 window.exportShape = () => {
-  const canvas = document.getElementById("result");
+  const canvas = document.getElementById("canvas");
   const imageURL = canvas.toDataURL("image/png");
 
   const dummyLink = document.createElement("a");

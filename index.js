@@ -3,6 +3,10 @@
  *
  */
 
+ if (window.localStorage.lastKey) {
+  document.getElementById("code").value = window.localStorage.lastKey;
+ }
+
 const maxLayer = 4;
 
 /** @enum {string} */
@@ -155,7 +159,7 @@ function fromShortKey(key) {
     }
     layers.push(quads);
   }
-
+  window.localStorage['lastKey'] = key;
   return layers;
 }
 
@@ -313,7 +317,6 @@ window.generate = () => {
     showError(ex);
     return;
   }
-
   renderShape(parsed);
 };
 

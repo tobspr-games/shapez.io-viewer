@@ -38,7 +38,7 @@
       <img id="logo" src="logo.png" />
     </a>
     <h1>Shape viewer</h1>
-    <!-- 
+    <!--
     <a
       class="nftHint"
       href="https://opensea.io/collection/shapez"
@@ -161,6 +161,71 @@
               </li>
             </ul>
           </div>
+        </div>
+
+        <h3>Modify Shape</h3>
+
+        <div class="modify">
+          <button class="modifybutton" onclick="updateModifyLayers()" >All Layers</button><!--
+          --><button class="modifybutton" onclick="updateModifyLayers(0)">Layer 1</button><!--
+          --><button class="modifybutton" onclick="updateModifyLayers(1)">Layer 2</button><!--
+          --><button class="modifybutton" onclick="updateModifyLayers(2)">Layer 3</button><!--
+          --><button class="modifybutton" onclick="updateModifyLayers(3)">Layer 4</button><!--
+          --><br/>
+          <span style=""              id="modifyLayers"></span>
+          <span style="display:none;" id="modifyLayer0"></span>
+          <span style="display:none;" id="modifyLayer1"></span>
+          <span style="display:none;" id="modifyLayer2"></span>
+          <span style="display:none;" id="modifyLayer3"></span>
+          <script>
+            function updateModifyLayers(layer) {
+              document.getElementById("modifyLayers").style.display = layer == null ? "" : "none";
+              document.getElementById("modifyLayer0").style.display = layer == 0    ? "" : "none";
+              document.getElementById("modifyLayer1").style.display = layer == 1    ? "" : "none";
+              document.getElementById("modifyLayer2").style.display = layer == 2    ? "" : "none";
+              document.getElementById("modifyLayer3").style.display = layer == 3    ? "" : "none";
+            }
+            updateModifyLayers();
+            let modifications = [
+              { labelPrefix: "Rotate ", labelSuffix: " CCW", modification: [1,2,3,0] },
+              { labelPrefix: "Rotate ", labelSuffix: " CW", modification: [3,0,1,2] },
+              { newline: true },
+              { labelPrefix: "Flip ", labelSuffix: " Horizontal", modification: [3,2,1,0] },
+              { labelPrefix: "Flip ", labelSuffix: " Vertical", modification: [1,0,3,2] },
+              { newline: true },
+              { labelPrefix: 'C#ff666a Paint ', labelSuffix: " Red", modification: "r" },
+              { labelPrefix: 'C#78ff66 Paint ', labelSuffix: " Green", modification: "g" },
+              { labelPrefix: 'C#66a7ff Paint ', labelSuffix: " Blue", modification: "b" },
+              { labelPrefix: 'C#fcf52a Paint ', labelSuffix: " Yellow", modification: "y" },
+              { labelPrefix: 'C#dd66ff Paint ', labelSuffix: " Purple", modification: "p" },
+              { labelPrefix: 'C#87fff5 Paint ', labelSuffix: " Cyan", modification: "c" },
+              { labelPrefix: 'C#aaaaaa Uncolor ', labelSuffix: "", modification: "u" },
+              { labelPrefix: 'C#ffffff Paint ', labelSuffix: " White", modification: "w" },
+            ];
+            function replaceColor(text) {
+              return text.replace(/C\#([0-9A-Fa-f]{6})/g, (t, color) => '<span class="colorPreview noMargin" style="background: #'+color+'"></span>');
+            };
+            for (let i = 0; i < modifications.length; i++) {
+              document.getElementById("modifyLayers").innerHTML += modifications[i].newline ? `<br> ` : (`<button class="modifybutton modifyb" `+
+                `onclick='modifyShapeLayers(${JSON.stringify(modifications[i].modification)})'>`+
+                `${replaceColor(modifications[i].labelPrefix)}All Layers${replaceColor(modifications[i].labelSuffix)}</button>`);
+              document.getElementById("modifyLayer0").innerHTML += modifications[i].newline ? `<br> ` : (`<button class="modifybutton modifyb" `+
+                `onclick='modifyShapeLayers(0,${JSON.stringify(modifications[i].modification)})'>`+
+                `${replaceColor(modifications[i].labelPrefix)}Layer 1${replaceColor(modifications[i].labelSuffix)}</button>`);
+              document.getElementById("modifyLayer1").innerHTML += modifications[i].newline ? `<br> ` : (`<button class="modifybutton modifyb" `+
+                `onclick='modifyShapeLayers(1,${JSON.stringify(modifications[i].modification)})'>`+
+                `${replaceColor(modifications[i].labelPrefix)}Layer 2${replaceColor(modifications[i].labelSuffix)}</button>`);
+              document.getElementById("modifyLayer2").innerHTML += modifications[i].newline ? `<br> ` : (`<button class="modifybutton modifyb" `+
+                `onclick='modifyShapeLayers(2,${JSON.stringify(modifications[i].modification)})'>`+
+                `${replaceColor(modifications[i].labelPrefix)}Layer 3${replaceColor(modifications[i].labelSuffix)}</button>`);
+              document.getElementById("modifyLayer3").innerHTML += modifications[i].newline ? `<br> ` : (`<button class="modifybutton modifyb" `+
+                `onclick='modifyShapeLayers(3,${JSON.stringify(modifications[i].modification)})'>`+
+                `${replaceColor(modifications[i].labelPrefix)}Layer 4${replaceColor(modifications[i].labelSuffix)}</button>`);
+            }
+            "s0123".split("").forEach(function(e) {
+              document.getElementById("modifyLayer" + e).innerHTML += "<br/>";
+            });
+          </script>
         </div>
 
         <h3>Examples</h3>

@@ -132,6 +132,21 @@ button:hover {
   opacity: 0.9;
 }
 
+.modify {
+  display: block;
+}
+
+.modifyb {
+  width: 230px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.modifybutton {
+  margin-bottom: 3px;
+  margin-right: 3px;
+}
+
 .grid {
   display: flex;
   flex-direction: row;
@@ -181,6 +196,13 @@ ul {
   border: 1px solid #333538;
   margin-left: 3px;
   margin-right: 10px;
+  vertical-align: bottom;
+}
+
+.noMargin {
+  margin: 0px;
+  margin-right: 3px;
+  vertical-align: middle;
 }
 
 .example {

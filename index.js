@@ -379,6 +379,31 @@ function getRandomColor() {
   ];
 }
 
+window.modifyShapeLayers = (index, modification) => {
+  if (!modification) {
+    modification = index;
+    index = undefined;
+  }
+  let layers = document.getElementById("code").value.split(":");
+  for (var i = 0; i < layers.length; i++) {
+    if (index != undefined) if (i != index) continue;
+    if (typeof modification === "string") {
+      if (Object.values(enumSubShapeToShortcode).includes(modification)) {
+        layers[i] = layers[i].replace(new RegExp(Object.values(enumSubShapeToShortcode).join(""), "g"), modification);
+      } else if (Object.values(enumColorToShortcode).includes(modification)) {
+        layers[i] = layers[i].replace(new RegExp(`[${Object.values(enumColorToShortcode).join("")}]`, "g"), modification);
+      }
+    } else if (Array.isArray(modification)) {
+      if (layers[i].length == 8) {
+        var p = layers[i].match(/../g);
+        layers[i] = modification.map(j => p[j]).join("");
+      }
+    }
+  }
+  document.getElementById("code").value = layers.join(":");
+  generate();
+};
+
 window.randomShape = () => {
   let layers = getRandomInt(maxLayer);
   let code = "";

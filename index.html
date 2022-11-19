@@ -72,6 +72,7 @@
         </div>
         <button onclick="exportShape()">Export</button>
         <button onclick="shareShape()">Share</button>
+        <button onclick="viewLayer()">View layer</button>
       </div>
       <div class="col infoBox">
         <h2>About</h2>
@@ -189,6 +190,35 @@
         </div>
       </div>
     </div>
+
+    
+    <div class="dialogs">
+      <dialog onclick="closeModal()">
+
+        <div class="grid">
+          <div class="col">
+              <h3>Layer 1</h3>
+              <canvas id="result-layer-0" width="256" height="256"></canvas>
+          </div>
+          <div class="col">
+              <h3>Layer 2</h3>
+              <canvas id="result-layer-1" width="256" height="256"></canvas>
+          </div>
+        </div>
+          
+        <div class="grid">
+          <div class="col">
+            <h3>Layer 3</h3>
+              <canvas id="result-layer-2" width="256" height="256"></canvas>
+          </div>
+          <div class="col">
+            <h3>Layer 4</h3>
+              <canvas id="result-layer-3" width="256" height="256"></canvas>
+          </div>
+        </div>
+        <button onclick="closeModal()">Close</button>
+      </dialog>
+  </div>
 
     <div class="footer">
       <a target="_blank" href="https://get.shapez.io/viewer">Steam Page</a> |
